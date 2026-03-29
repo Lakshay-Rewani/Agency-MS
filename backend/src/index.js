@@ -28,9 +28,7 @@ app.get("/", (req, res) => {
   res.send("Backend working 🚀");
 });
 
-app.post("/api/login", (req, res) => {
-  res.json({ message: "Login API working" });
-});
+
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
