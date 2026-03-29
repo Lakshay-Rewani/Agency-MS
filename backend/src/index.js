@@ -23,6 +23,15 @@ app.use((req, res, next) => {
   next();
 });
 
+// Test routes
+app.get("/", (req, res) => {
+  res.send("Backend working 🚀");
+});
+
+app.post("/api/login", (req, res) => {
+  res.json({ message: "Login API working" });
+});
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
