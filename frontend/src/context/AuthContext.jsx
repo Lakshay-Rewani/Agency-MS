@@ -26,12 +26,20 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const res = await authAPI.login({ email, password });
-    const { token, user: userData } = res.data;
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(userData));
-    setUser(userData);
-    return userData;
+    console.log('Attempting login function for:', email);
+    try {
+      const res = await authAPI.login({ email, password });
+      console.log('Login API Response success:', !!res.data.token);
+      const { token, user: userData } = res.data;
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(userData));
+      setUser(userData);
+      console.log('User state updated with role:', userData.role);
+      return userData;
+    } catch (err) {
+      console.error('Login Context Error:', err.response?.data || err.message);
+      throw err;
+    }
   };
 
   const logout = () => {

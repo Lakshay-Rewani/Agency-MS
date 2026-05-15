@@ -19,9 +19,12 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      await login(email, password);
+      console.log('Submitting login form for', email);
+      const userData = await login(email, password);
+      console.log('Login success in component, navigating... User:', userData.name);
       navigate('/');
     } catch (err) {
+      console.error('Login Component Error:', err.response?.data || err.message);
       setError(err.response?.data?.error || 'Login failed. Please try again.');
     } finally {
       setLoading(false);
