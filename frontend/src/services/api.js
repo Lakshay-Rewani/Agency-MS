@@ -4,7 +4,9 @@
  */
 import axios from 'axios';
 
-let API_BASE = import.meta.env.VITE_API_URL || 'https://agency-ms.onrender.com/api';
+// Priority: Environment Variable > Localhost Fallback
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+let API_BASE = VITE_API_URL || 'http://localhost:5000';
 
 // Ensure it always ends with /api (without trailing slash)
 if (!API_BASE.endsWith('/api')) {
