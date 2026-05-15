@@ -17,16 +17,20 @@ import UsersPage from './pages/UsersPage';
 /** Protected route wrapper */
 function ProtectedRoute({ children, adminOnly = false }) {
   const { user, loading, isAdmin } = useAuth();
+  
+  console.log('ProtectedRoute Check:', { user: !!user, loading, isAdmin, adminOnly, path: window.location.pathname });
 
   if (loading) {
     return <div className="loading"><div className="spinner" /></div>;
   }
 
   if (!user) {
+    console.log('No user in ProtectedRoute, redirecting to /login');
     return <Navigate to="/login" replace />;
   }
 
   if (adminOnly && !isAdmin) {
+    console.log('Not admin in ProtectedRoute, redirecting to /');
     return <Navigate to="/" replace />;
   }
 
