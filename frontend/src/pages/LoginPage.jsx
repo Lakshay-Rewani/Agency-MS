@@ -5,9 +5,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
-
-const API = import.meta.env.VITE_API_URL;
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -22,10 +19,7 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      const response = await axios.post(`${API}/api/auth/login`, { email, password });
-      const { token, user } = response.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      await login(email, password);
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed. Please try again.');
