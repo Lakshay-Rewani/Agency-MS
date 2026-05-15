@@ -4,8 +4,14 @@
  */
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'https://agency-ms.onrender.com/api';
-console.log('API_BASE is set to:', API_BASE);
+let API_BASE = import.meta.env.VITE_API_URL || 'https://agency-ms.onrender.com/api';
+
+// Ensure it always ends with /api (without trailing slash)
+if (!API_BASE.endsWith('/api')) {
+  API_BASE = API_BASE.replace(/\/$/, '') + '/api';
+}
+
+console.log('Final API_BASE used:', API_BASE);
 
 const api = axios.create({
   baseURL: API_BASE,
