@@ -1,4 +1,5 @@
 # Textile Agency Management System
+Last updated: May 15, 2026
 
 A full-stack web application for managing a raw cloth agency business — clients, transactions, inventory, and payments.
 
